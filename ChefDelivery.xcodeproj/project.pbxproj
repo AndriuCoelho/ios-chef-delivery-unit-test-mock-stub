@@ -28,6 +28,8 @@
 		187C24952BE556DC0030193A /* SearchStoreViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187C24942BE556DC0030193A /* SearchStoreViewModelTests.swift */; };
 		187C24972BE581390030193A /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187C24962BE581390030193A /* StringExtension.swift */; };
 		187C24992BE5817D0030193A /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187C24982BE5817D0030193A /* ArrayExtension.swift */; };
+		18F7BF002BF7EABB004BF722 /* Mocker in Frameworks */ = {isa = PBXBuildFile; productRef = 18F7BEFF2BF7EABB004BF722 /* Mocker */; };
+		18F7BF032BF7EB48004BF722 /* SearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF022BF7EB48004BF722 /* SearchServiceTests.swift */; };
 		48A230C02A2BFAF300431A41 /* StoreDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A230BF2A2BFAF300431A41 /* StoreDetailView.swift */; };
 		48A230C22A2BFC1200431A41 /* StoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A230C12A2BFC1200431A41 /* StoreType.swift */; };
 		48A230C42A2BFC1B00431A41 /* ProductType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A230C32A2BFC1B00431A41 /* ProductType.swift */; };
@@ -74,6 +76,7 @@
 		187C24942BE556DC0030193A /* SearchStoreViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStoreViewModelTests.swift; sourceTree = "<group>"; };
 		187C24962BE581390030193A /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		187C24982BE5817D0030193A /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		18F7BF022BF7EB48004BF722 /* SearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceTests.swift; sourceTree = "<group>"; };
 		48A230BF2A2BFAF300431A41 /* StoreDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDetailView.swift; sourceTree = "<group>"; };
 		48A230C12A2BFC1200431A41 /* StoreType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreType.swift; sourceTree = "<group>"; };
 		48A230C32A2BFC1B00431A41 /* ProductType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductType.swift; sourceTree = "<group>"; };
@@ -100,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F7BF002BF7EABB004BF722 /* Mocker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +249,7 @@
 		187C248B2BE555EC0030193A /* ChefDeliveryTests */ = {
 			isa = PBXGroup;
 			children = (
+				18F7BF012BF7EB0A004BF722 /* Networking */,
 				187C24932BE5565C0030193A /* ViewModel */,
 			);
 			path = ChefDeliveryTests;
@@ -256,6 +261,14 @@
 				187C24942BE556DC0030193A /* SearchStoreViewModelTests.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		18F7BF012BF7EB0A004BF722 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				18F7BF022BF7EB48004BF722 /* SearchServiceTests.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		48A230C82A2C010500431A41 /* Extension */ = {
@@ -334,6 +347,9 @@
 				187C248F2BE555EC0030193A /* PBXTargetDependency */,
 			);
 			name = ChefDeliveryTests;
+			packageProductDependencies = (
+				18F7BEFF2BF7EABB004BF722 /* Mocker */,
+			);
 			productName = ChefDeliveryTests;
 			productReference = 187C248A2BE555EC0030193A /* ChefDeliveryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -369,6 +385,7 @@
 			mainGroup = 1828E7822A151C6700B8A3C6;
 			packageReferences = (
 				184E5BF62A5073090035CED1 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				18F7BEFE2BF7EABB004BF722 /* XCRemoteSwiftPackageReference "Mocker" */,
 			);
 			productRefGroup = 1828E78C2A151C6700B8A3C6 /* Products */;
 			projectDirPath = "";
@@ -440,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				187C24952BE556DC0030193A /* SearchStoreViewModelTests.swift in Sources */,
+				18F7BF032BF7EB48004BF722 /* SearchServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +733,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		18F7BEFE2BF7EABB004BF722 /* XCRemoteSwiftPackageReference "Mocker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WeTransfer/Mocker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -722,6 +748,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 184E5BF62A5073090035CED1 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		18F7BEFF2BF7EABB004BF722 /* Mocker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18F7BEFE2BF7EABB004BF722 /* XCRemoteSwiftPackageReference "Mocker" */;
+			productName = Mocker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
