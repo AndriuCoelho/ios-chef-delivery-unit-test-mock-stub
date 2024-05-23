@@ -153,6 +153,24 @@ final class SearchStoreViewModelTests: XCTestCase {
         
         wait(for: [expectation], timeout: 1)
     }
+    
+    func testFetchDataWithFail() {
+        let stub = StubSearchServiceFail()
+        sut = SearchStoreViewModel(service: stub)
+        
+        let expectation = XCTestExpectation(description: "Should show error alert")
+        sut
+            .$showAlert
+            .dropFirst()
+            .sink { showAlert in
+                XCTAssertTrue(showAlert)
+                expectation.fulfill()
+            }
+            .store(in: &sut.cancellables)
+        
+        sut.fetchData()
+        wait(for: [expectation], timeout: 1)
+    }
 }
 
 class StubSearchService: SearchServiceProtocol {
@@ -177,5 +195,11 @@ class StubSearchService: SearchServiceProtocol {
         ]
         
         return .success(stores)
+    }
+}
+
+class StubSearchServiceFail: SearchServiceProtocol {
+    func fetchData() async throws -> Result<[StoreType], RequestError> {
+        return .failure(RequestError.errorRequest(error: "error 500"))
     }
 }

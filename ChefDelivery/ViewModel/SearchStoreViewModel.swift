@@ -19,6 +19,7 @@ class SearchStoreViewModel: ObservableObject {
     let service: SearchServiceProtocol
     @Published var storesType: [StoreType] = []
     @Published var searchText: String = ""
+    @Published var showAlert = false
     
     var cancellables = Set<AnyCancellable>()
     
@@ -36,11 +37,14 @@ class SearchStoreViewModel: ObservableObject {
                 case .success(let stores):
                     DispatchQueue.main.async {
                         self.storesType = stores
+                        self.showAlert = false
                     }
                 case .failure(let error):
+                    showAlert = true
                     print(error.localizedDescription)
                 }
             } catch {
+                showAlert = true
                 print(error.localizedDescription)
             }
         }

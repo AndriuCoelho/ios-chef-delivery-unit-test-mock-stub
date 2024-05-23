@@ -70,6 +70,9 @@ struct SearchStoreView: View {
                 
                 Spacer()
             }
+            .alert(Text("Desculpe!"), isPresented: $viewModel.showAlert){} message: {
+                Text("Nosso time está trabalhando na solução deste problema.")
+            }
         }.onAppear {
             viewModel.fetchData()
         }
