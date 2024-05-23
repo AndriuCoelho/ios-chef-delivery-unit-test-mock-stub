@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 enum SearchError: Error {
     case noResultsFound
@@ -15,12 +16,14 @@ class SearchStoreViewModel: ObservableObject {
     
     // MARK: - Attributes
     
-    let service = SearchService()
+    let service: SearchServiceProtocol
     @Published var storesType: [StoreType] = []
     @Published var searchText: String = ""
     
-    init() {
-        fetchData()
+    var cancellables = Set<AnyCancellable>()
+    
+    init(service: SearchServiceProtocol) {
+        self.service = service
     }
     
     // MARK: - Class methods
@@ -31,7 +34,9 @@ class SearchStoreViewModel: ObservableObject {
                 let result = try await service.fetchData()
                 switch result {
                 case .success(let stores):
-                    self.storesType = stores
+                    DispatchQueue.main.async {
+                        self.storesType = stores
+                    }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

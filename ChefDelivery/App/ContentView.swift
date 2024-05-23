@@ -43,7 +43,7 @@ struct ContentView: View {
                     Text("Inicio")
                 }
                 
-                SearchStoreView(viewModel: SearchStoreViewModel())
+                SearchStoreView(viewModel: SearchStoreViewModel(service: SearchService()))
                     .tabItem {
                         Image(systemName: "magnifyingglass")
                         Text("Busca")

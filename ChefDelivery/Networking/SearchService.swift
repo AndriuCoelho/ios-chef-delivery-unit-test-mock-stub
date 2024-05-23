@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct SearchService {
+protocol SearchServiceProtocol {
+    func fetchData() async throws -> Result<[StoreType], RequestError>
+}
+
+struct SearchService: SearchServiceProtocol {
     
     func fetchData() async throws -> Result<[StoreType], RequestError> {
         guard let url = URL(string: "https://private-11274d-chefdeliveryapi.apiary-mock.com/search") else {

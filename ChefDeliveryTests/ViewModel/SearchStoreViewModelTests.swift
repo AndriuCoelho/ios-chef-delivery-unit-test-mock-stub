@@ -17,7 +17,7 @@ final class SearchStoreViewModelTests: XCTestCase {
     // MARK: - Setup
 
     override func setUpWithError() throws {
-        sut = SearchStoreViewModel()
+        sut = SearchStoreViewModel(service: SearchService())
         
         sut.storesType = [StoreType(id: 1,
                                     name: "Monstro Burger",
@@ -130,5 +130,52 @@ final class SearchStoreViewModelTests: XCTestCase {
         
         XCTAssertThrowsError(try sut.filteredStores())
     }
+    
+    func testFetchDataWithSuccess() {
+        let stub = StubSearchService()
+        sut = SearchStoreViewModel(service: stub)
+        
+        let expectation = XCTestExpectation(description: "load restaurants list")
+        
+        sut
+            .$storesType
+            .dropFirst()
+            .sink { stores in
+                XCTAssertEqual(2, stores.count)
+                XCTAssertEqual("Monstro Burger", stores[0].name)
+                XCTAssertEqual("Food Court", stores[1].name)
+                
+                expectation.fulfill()
+            }
+            .store(in: &sut.cancellables)
+        
+        sut.fetchData()
+        
+        wait(for: [expectation], timeout: 1)
+    }
+}
 
+class StubSearchService: SearchServiceProtocol {
+    func fetchData() async throws -> Result<[StoreType], RequestError> {
+        let stores: [StoreType] = [
+            StoreType(id: 1,
+                                        name: "Monstro Burger",
+                                        logoImage: nil,
+                                        headerImage: nil,
+                                        location: "Rua Principal, 123, São Paulo, SP",
+                                        stars: 4,
+                                        products: [],
+                                        specialties: ["hamburguer", "lanchonete"]),
+                              StoreType(id: 2,
+                                        name: "Food Court",
+                                        logoImage: nil,
+                                        headerImage: nil,
+                                        location: "Avenida Secundária, 456, São Paulo, SP",
+                                        stars: 4,
+                                        products: [],
+                                        specialties: ["pizza", "lanchonete"])
+        ]
+        
+        return .success(stores)
+    }
 }

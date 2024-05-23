@@ -70,6 +70,8 @@ struct SearchStoreView: View {
                 
                 Spacer()
             }
+        }.onAppear {
+            viewModel.fetchData()
         }
     }
 
