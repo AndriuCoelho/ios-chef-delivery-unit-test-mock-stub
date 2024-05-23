@@ -10,6 +10,7 @@ import Alamofire
 
 enum RequestError: Error {
     case invalidURL
+    case serverError(Int)
     case errorRequest(error: String)
 }
 

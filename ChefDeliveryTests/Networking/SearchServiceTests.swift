@@ -50,6 +50,28 @@ final class SearchServiceTests: XCTestCase {
         
         await fulfillment(of: [expectation], timeout: 1)
     }
+    
+    func testFetchDataWithFailure() async {
+        let url = URL(string: "https://private-11274d-chefdeliveryapi.apiary-mock.com/search")!
+        Mock(url: url, statusCode: 500, data: [.get: Data()], requestError: RequestError.serverError(500)).register()
+        
+        let expectation = XCTestExpectation(description: "Fetch data failure")
+        
+        do {
+            let result = try await sut.fetchData()
+            switch result {
+            case .success(_):
+                XCTFail("Expected failure, but got success")
+            case .failure(let error):
+                XCTAssertEqual("The operation couldn’t be completed. (ChefDelivery.RequestError error 1.)", error.localizedDescription)
+                expectation.fulfill()
+            }
+        } catch {
+            XCTFail()
+        }
+        
+        await fulfillment(of: [expectation], timeout: 1)
+    }
 }
 
 extension SearchServiceTests {
